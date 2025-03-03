@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 
 import useSyncReadingProgress from "./hooks/useSyncReadingProgress";
 import ReadingPreferenceSwitcher from "./ReadingPreferenceSwitcher";
-import TranslationView from "./TranslationView";
+// import TranslationView from "./TranslationView";
 
 import QuranReaderStyles from "@/redux/types/QuranReaderStyles";
 import { VersesResponse } from "types/ApiResponses";
