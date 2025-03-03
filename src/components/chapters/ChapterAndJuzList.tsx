@@ -1,40 +1,40 @@
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from 'react';
 
-import classNames from "classnames";
-import dynamic from "next/dynamic";
-import Trans from "next-translate/Trans";
-import useTranslation from "next-translate/useTranslation";
+import classNames from 'classnames';
+import dynamic from 'next/dynamic';
+import Trans from 'next-translate/Trans';
+import useTranslation from 'next-translate/useTranslation';
 
-import Link from "../dls/Link/Link";
-import SurahPreviewRow from "../dls/SurahPreview/SurahPreviewRow";
-import Tabs from "../dls/Tabs/Tabs";
+import Link from '../dls/Link/Link';
+import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
+import Tabs from '../dls/Tabs/Tabs';
 
-import styles from "./ChapterAndJuzList.module.scss";
-import ChapterAndJuzListSkeleton from "./ChapterAndJuzListSkeleton";
+import styles from './ChapterAndJuzList.module.scss';
+import ChapterAndJuzListSkeleton from './ChapterAndJuzListSkeleton';
 
-import CaretDownIcon from "@/icons/caret-down.svg";
-import { logButtonClick, logValueChange } from "@/utils/eventLogger";
-import { shouldUseMinimalLayout, toLocalizedNumber } from "@/utils/locale";
-import Chapter from "types/Chapter";
+import CaretDownIcon from '@/icons/caret-down.svg';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
+import Chapter from 'types/Chapter';
 
 enum View {
-  Surah = "surah",
-  Juz = "juz",
-  RevelationOrder = "revelation_order",
+  Surah = 'surah',
+  Juz = 'juz',
+  RevelationOrder = 'revelation_order',
 }
 
-const JuzView = dynamic(() => import("./JuzView"), {
+const JuzView = dynamic(() => import('./JuzView'), {
   ssr: false,
   loading: () => <ChapterAndJuzListSkeleton />,
 });
 
-const MobilePopover = dynamic(() => import("@/dls/Popover/HoverablePopover"), {
+const MobilePopover = dynamic(() => import('@/dls/Popover/HoverablePopover'), {
   ssr: false,
 });
 
-const RevelationOrderView = dynamic(() => import("./RevelationOrderView"), {
+const RevelationOrderView = dynamic(() => import('./RevelationOrderView'), {
   ssr: false,
   loading: () => <ChapterAndJuzListSkeleton />,
 });
@@ -44,8 +44,8 @@ type ChapterAndJuzListProps = {
 };
 
 enum Sort {
-  ASC = "ascending",
-  DESC = "descending",
+  ASC = 'ascending',
+  DESC = 'descending',
 }
 
 const MOST_VISITED_CHAPTERS = {
@@ -81,12 +81,9 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
     () => [
       { title: t(`common:${View.Surah}`), value: View.Surah },
       { title: t(`common:${View.Juz}`), value: View.Juz },
-      {
-        title: t(`common:${View.RevelationOrder}`),
-        value: View.RevelationOrder,
-      },
+      { title: t(`common:${View.RevelationOrder}`), value: View.RevelationOrder },
     ],
-    [t]
+    [t],
   );
 
   const sortedChapters = useMemo(
@@ -94,7 +91,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       sortBy === Sort.DESC
         ? chapters.slice().sort((a, b) => Number(b.id) - Number(a.id))
         : chapters,
-    [sortBy, chapters]
+    [sortBy, chapters],
   );
 
   const onTabSelected = (newView) => {
@@ -108,7 +105,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       <div className={styles.tabsContainer}>
         <Tabs tabs={tabs} selected={view} onSelect={onTabSelected} />
         <div className={styles.sorter}>
-          <div className={styles.uppercase}>{t("common:sort.by")}:</div>
+          <div className={styles.uppercase}>{t('common:sort.by')}:</div>
           <div
             className={styles.sortByValue}
             onClick={onSort}
@@ -117,7 +114,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
             tabIndex={0}
           >
             <span>{t(`common:sort.${sortBy}`)}</span>
-            <span className={sortBy === Sort.ASC ? styles.rotate180 : ""}>
+            <span className={sortBy === Sort.ASC ? styles.rotate180 : ''}>
               <CaretDownIcon />
             </span>
           </div>
@@ -137,11 +134,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
                     />
                   ),
                   // @ts-ignore
-                  hover: (
-                    <MobilePopover isContainerSpan content={t("common:pbuh")}>
-                      <></>
-                    </MobilePopover>
-                  ),
+                  hover: <MobilePopover isContainerSpan content={t('common:pbuh')} />,
                 }}
               />
             </span>
@@ -150,8 +143,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       </div>
       <div
         className={classNames({
-          [styles.surahLayout]:
-            view === View.Surah || view === View.RevelationOrder,
+          [styles.surahLayout]: view === View.Surah || view === View.RevelationOrder,
           [styles.juzLayout]: view === View.Juz,
         })}
       >
@@ -160,16 +152,13 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
             <div className={styles.chapterContainer} key={chapter.id}>
               <Link
                 href={`/${chapter.id}`}
-                shouldPrefetch={
-                  MOST_VISITED_CHAPTERS[Number(chapter.id)] === true
-                }
+                shouldPrefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] === true}
               >
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
-                  description={`${toLocalizedNumber(
-                    chapter.versesCount,
-                    lang
-                  )} ${t("common:ayahs")}`}
+                  description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t(
+                    'common:ayahs',
+                  )}`}
                   surahName={chapter.transliteratedName}
                   surahNumber={Number(chapter.id)}
                   translatedSurahName={chapter.translatedName as string}
@@ -180,10 +169,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
           ))}
         {view === View.Juz && <JuzView isDescending={sortBy === Sort.DESC} />}
         {view === View.RevelationOrder && (
-          <RevelationOrderView
-            isDescending={sortBy === Sort.DESC}
-            chapters={chapters}
-          />
+          <RevelationOrderView isDescending={sortBy === Sort.DESC} chapters={chapters} />
         )}
       </div>
     </>

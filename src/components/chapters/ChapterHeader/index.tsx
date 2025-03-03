@@ -1,27 +1,23 @@
 /* eslint-disable i18next/no-literal-string */
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 
-import useTranslation from "next-translate/useTranslation";
-import { useDispatch } from "react-redux";
+import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
-import styles from "./ChapterHeader.module.scss";
+import styles from './ChapterHeader.module.scss';
 
 import ChapterIconContainer, {
   ChapterIconsSize,
-} from "@/components/chapters/ChapterIcon/ChapterIconContainer";
-import { QURAN_READER_OBSERVER_ID } from "@/components/QuranReader/observer";
-import PlayChapterAudioButton from "@/components/QuranReader/PlayChapterAudioButton";
-import Bismillah from "@/dls/Bismillah/Bismillah";
-import Button, { ButtonSize, ButtonVariant } from "@/dls/Button/Button";
-import useIntersectionObserver from "@/hooks/useObserveElement";
-import InfoIcon from "@/icons/info.svg";
-import {
-  setIsSettingsDrawerOpen,
-  setSettingsView,
-  SettingsView,
-} from "@/redux/slices/navbar";
-import { logButtonClick } from "@/utils/eventLogger";
-import { getSurahInfoNavigationUrl } from "@/utils/navigation";
+} from '@/components/chapters/ChapterIcon/ChapterIconContainer';
+import { QURAN_READER_OBSERVER_ID } from '@/components/QuranReader/observer';
+import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
+import Bismillah from '@/dls/Bismillah/Bismillah';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import useIntersectionObserver from '@/hooks/useObserveElement';
+import InfoIcon from '@/icons/info.svg';
+import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getSurahInfoNavigationUrl } from '@/utils/navigation';
 
 interface Props {
   chapterId: string;
@@ -31,7 +27,7 @@ interface Props {
   isTranslationSelected?: boolean;
 }
 
-const CHAPTERS_WITHOUT_BISMILLAH = ["1", "9"];
+const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 
 const ChapterHeader: React.FC<Props> = ({
   chapterId,
@@ -41,7 +37,7 @@ const ChapterHeader: React.FC<Props> = ({
   isTranslationSelected,
 }) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const headerRef = useRef(null);
   /**
    * the intersection observer is needed so that we know that the first verse
@@ -53,7 +49,7 @@ const ChapterHeader: React.FC<Props> = ({
   const onChangeTranslationClicked = () => {
     dispatch(setIsSettingsDrawerOpen(true));
     dispatch(setSettingsView(SettingsView.Translation));
-    logButtonClick("change_translation");
+    logButtonClick('change_translation');
   };
 
   return (
@@ -66,10 +62,7 @@ const ChapterHeader: React.FC<Props> = ({
     >
       <div className={styles.header}>
         <div className={styles.chapterIconContainer}>
-          <ChapterIconContainer
-            chapterId={chapterId}
-            size={ChapterIconsSize.Mega}
-          />
+          <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Mega} />
         </div>
       </div>
       <div className={styles.bismillahContainer}>
@@ -81,11 +74,9 @@ const ChapterHeader: React.FC<Props> = ({
             {translationName ? (
               <div className={styles.translation}>
                 {isTranslationSelected && (
-                  <div className={styles.translationBy}>
-                    {t("quran-reader:translation-by")}
-                  </div>
+                  <div className={styles.translationBy}>{t('quran-reader:translation-by')}</div>
                 )}
-                <span>{translationName}</span>{" "}
+                <span>{translationName}</span>{' '}
                 <span
                   onKeyPress={onChangeTranslationClicked}
                   tabIndex={0}
@@ -93,7 +84,7 @@ const ChapterHeader: React.FC<Props> = ({
                   onClick={onChangeTranslationClicked}
                   className={styles.changeTranslation}
                 >
-                  ({t("quran-reader:trans-change")})
+                  ({t('quran-reader:trans-change')})
                 </span>
                 <span className={styles.changeTranslation} />
               </div>
@@ -106,10 +97,10 @@ const ChapterHeader: React.FC<Props> = ({
                 shouldPrefetch={false}
                 hasSidePadding={false}
                 onClick={() => {
-                  logButtonClick("chapter_header_info");
+                  logButtonClick('chapter_header_info');
                 }}
               >
-                {t("quran-reader:surah-info")}
+                {t('quran-reader:surah-info')}
               </Button>
             )}
           </div>
@@ -124,10 +115,10 @@ const ChapterHeader: React.FC<Props> = ({
               shouldPrefetch={false}
               hasSidePadding={false}
               onClick={() => {
-                logButtonClick("chapter_header_info");
+                logButtonClick('chapter_header_info');
               }}
             >
-              {t("quran-reader:surah-info")}
+              {t('quran-reader:surah-info')}
             </Button>
           )}
           <div className={styles.actionContainer}>

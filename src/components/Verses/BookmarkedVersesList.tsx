@@ -2,35 +2,32 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 
-import useTranslation from "next-translate/useTranslation";
-import { shallowEqual, useSelector, useDispatch } from "react-redux";
-import useSWR from "swr";
+import useTranslation from 'next-translate/useTranslation';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import useSWR from 'swr';
 
-import styles from "./BookmarkedVersesList.module.scss";
-import BookmarkedVersesListSkeleton from "./BookmarkedVesesListSkeleton";
-import BookmarkPill from "./BookmarkPill";
+import styles from './BookmarkedVersesList.module.scss';
+import BookmarkedVersesListSkeleton from './BookmarkedVesesListSkeleton';
+import BookmarkPill from './BookmarkPill';
 
-import Link from "@/dls/Link/Link";
-import { ToastStatus, useToast } from "@/dls/Toast/Toast";
-import {
-  selectBookmarks,
-  toggleVerseBookmark,
-} from "@/redux/slices/QuranReader/bookmarks";
-import { selectQuranReaderStyles } from "@/redux/slices/QuranReader/styles";
-import { getMushafId } from "@/utils/api";
-import { deleteBookmarkById, privateFetcher } from "@/utils/auth/api";
-import { makeBookmarksUrl } from "@/utils/auth/apiPaths";
-import { isLoggedIn } from "@/utils/auth/login";
-import { logButtonClick } from "@/utils/eventLogger";
-import { getVerseAndChapterNumbersFromKey, makeVerseKey } from "@/utils/verse";
-import Bookmark from "types/Bookmark";
+import Link from '@/dls/Link/Link';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getMushafId } from '@/utils/api';
+import { deleteBookmarkById, privateFetcher } from '@/utils/auth/api';
+import { makeBookmarksUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
+import Bookmark from 'types/Bookmark';
 
 const BOOKMARKS_API_LIMIT = 10; // The number of bookmarks to fetch from the api
 
 const BookmarkedVersesList = () => {
-  const { t } = useTranslation("home");
+  const { t } = useTranslation('home');
 
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const dispatch = useDispatch();
@@ -42,14 +39,11 @@ const BookmarkedVersesList = () => {
   const { data, isValidating, mutate } = useSWR<Bookmark[]>(
     isLoggedIn() // only fetch the data when user is loggedIn
       ? makeBookmarksUrl(
-          getMushafId(
-            quranReaderStyles.quranFont,
-            quranReaderStyles.mushafLines
-          ).mushaf,
-          BOOKMARKS_API_LIMIT
+          getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+          BOOKMARKS_API_LIMIT,
         )
       : null,
-    privateFetcher
+    privateFetcher,
   );
 
   const bookmarkedVersesKeys = useMemo(() => {
@@ -57,9 +51,7 @@ const BookmarkedVersesList = () => {
 
     const isUserLoggedIn = isLoggedIn();
     if (isUserLoggedIn && data) {
-      return data.map((bookmark) =>
-        makeVerseKey(bookmark.key, bookmark.verseNumber)
-      );
+      return data.map((bookmark) => makeVerseKey(bookmark.key, bookmark.verseNumber));
     }
 
     if (!isUserLoggedIn) {
@@ -80,11 +72,10 @@ const BookmarkedVersesList = () => {
   }, [data]);
 
   const onBookmarkDeleted = (verseKey: string) => {
-    logButtonClick("bookmarked_verses_list_delete");
+    logButtonClick('bookmarked_verses_list_delete');
     if (isLoggedIn()) {
       const selectedBookmark = data.find((bookmark) => {
-        const [chapter, verseNumber] =
-          getVerseAndChapterNumbersFromKey(verseKey);
+        const [chapter, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
         return (
           Number(chapter) === Number(bookmark.key) &&
           Number(verseNumber) === Number(bookmark.verseNumber)
@@ -96,7 +87,7 @@ const BookmarkedVersesList = () => {
           mutate();
         })
         .catch(() => {
-          toast(t("common:error.general"), {
+          toast(t('common:error.general'), {
             status: ToastStatus.Error,
           });
         });
@@ -106,7 +97,7 @@ const BookmarkedVersesList = () => {
   };
 
   const onViewAllBookmarksClicked = () => {
-    logButtonClick("view_all_bookmarks");
+    logButtonClick('view_all_bookmarks');
   };
 
   if (isValidating) {
@@ -127,11 +118,7 @@ const BookmarkedVersesList = () => {
         <div className={styles.bookmarksContainer}>
           <div className={styles.verseLinksContainer}>
             {bookmarkedVersesKeys?.map((verseKey) => (
-              <BookmarkPill
-                key={verseKey}
-                verseKey={verseKey}
-                onDeleted={onBookmarkDeleted}
-              />
+              <BookmarkPill key={verseKey} verseKey={verseKey} onDeleted={onBookmarkDeleted} />
             ))}
             {hasReachedBookmarksLimit && (
               <Link
@@ -139,13 +126,13 @@ const BookmarkedVersesList = () => {
                 className={styles.viewAllBookmarksContainer}
                 onClick={onViewAllBookmarksClicked}
               >
-                {t("view-all-bookmarks")}
+                {t('view-all-bookmarks')}
               </Link>
             )}
           </div>
         </div>
       ) : (
-        <div>{t("no-bookmarks")}</div>
+        <div>{t('no-bookmarks')}</div>
       )}
     </div>
   );
