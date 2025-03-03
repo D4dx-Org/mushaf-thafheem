@@ -1,0 +1,63 @@
+.container {
+  display: inline-block;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.additionalWordGap {
+  margin-inline-end: var(--spacing-xxsmall);
+}
+
+.tajweedWord {
+  @media (prefers-color-scheme: dark) {
+    --tajweed-image-bg: rgba(255, 255, 255, 0.25);
+  }
+  @media (prefers-color-scheme: light) {
+    --tajweed-image-bg: rgba(31, 189, 233, 0.15);
+  }
+
+  &:hover {
+    background-color: var(--tajweed-image-bg);
+  }
+
+  @at-root .highlighted {
+    background-color: var(--tajweed-image-bg);
+  }
+}
+
+.secondaryHighlight {
+  background-color: var(--color-background-alternative-faded);
+}
+
+.wbwContainer {
+  text-align: center;
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+}
+
+.highlightOnHover {
+  &:hover {
+    color: var(--color-success-medium);
+  }
+}
+
+.highlighted {
+  color: var(--color-success-medium);
+}
+
+.tooltipText {
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+  white-space: normal;
+}
+
+.popoverTrigger {
+  // important is needed to over-ride the values of the popover
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+  margin-inline-start: 0 !important;
+  margin-inline-end: 0 !important;
+}

@@ -1,0 +1,86 @@
+@use "src/styles/breakpoints";
+@use "src/styles/theme";
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  @include breakpoints.tablet {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.reciterImage {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.reciterBio {
+  margin-block-end: var(--spacing-medium);
+  span {
+    @include theme.light {
+      background-color: var(--color-success-medium) !important;
+      color: var(
+        --color-text-inverse
+      ) !important; // white text on "success" background;
+    }
+    @include theme.dark {
+      background-color: var(--color-background-elevated) !important;
+      color: var(--color-text-default) !important;
+    }
+    @include theme.sepia {
+      background-color: var(--color-background-alternative-deep) !important;
+      color: var(--color-text-default) !important;
+    }
+  }
+}
+
+.reciterName {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xlarge);
+  text-align: center;
+  margin-block-end: var(--spacing-xxsmall);
+  @include breakpoints.tablet {
+    text-align: start;
+    margin-block-end: var(--spacing-medium);
+  }
+}
+
+.reciterImageContainer {
+  min-width: calc(5 * var(--spacing-mega));
+  min-height: calc(5 * var(--spacing-mega));
+  background-color: var(--color-background-alternative-deep);
+  border-radius: var(--border-radius-circle);
+  margin-inline-end: var(--spacing-medium);
+  position: relative;
+  overflow: hidden;
+
+  margin-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    margin-block-end: initial;
+  }
+}
+
+.moreLessButton {
+  cursor: pointer;
+  font-weight: var(--font-weight-bold);
+}
+
+.actionContainer {
+  display: flex;
+  justify-content: center;
+  @include breakpoints.tablet {
+    display: block;
+  }
+}
+.playButton {
+  width: 100%;
+  @include breakpoints.tablet {
+    width: auto;
+  }
+}

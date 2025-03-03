@@ -1,0 +1,19 @@
+.radioItemContainer {
+  display: flex;
+  align-items: center;
+  margin-block-start: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.label {
+  font-size: var(--font-size-normal);
+  line-height: var(--line-height-normal);
+  user-select: none;
+  padding-inline-start: var(--spacing-small);
+}
+
+.disabled {
+  color: var(--color-secondary-medium);
+}

@@ -1,0 +1,41 @@
+.container {
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-rounded);
+  position: relative;
+  display: flex;
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline: var(--spacing-xsmall);
+
+  & > div + div {
+    margin-inline-start: var(--spacing-small);
+  }
+  margin-block-end: var(--spacing-mega);
+
+  & .joinCommunityLink {
+    text-decoration: none;
+  }
+}
+
+.flow > div {
+  margin-block-end: var(--spacing-medium);
+}
+
+.platformLogoBackground {
+  position: absolute;
+  z-index: -1;
+  inset-inline-end: 0;
+
+  [data-theme="dark"] & {
+    opacity: var(--opacity-10);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    opacity: var(--opacity-10);
+  }
+}
+
+.title {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+}

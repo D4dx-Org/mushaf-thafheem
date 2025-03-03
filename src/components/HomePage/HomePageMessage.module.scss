@@ -1,0 +1,59 @@
+@use "src/styles/theme";
+
+.container {
+  position: relative;
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-success-medium);
+
+  background-color: var(--color-background-elevated);
+  color: var(--color-text-default);
+}
+
+.title {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-large);
+  margin-block-end: var(--spacing-medium);
+  line-height: var(--line-height-large);
+}
+
+.link {
+  margin-block-start: var(--spacing-small);
+}
+.description {
+  margin-block-end: var(--spacing-medium);
+}
+.version {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
+  display: flex;
+  align-items: center;
+  margin-block-end: var(--spacing-medium);
+
+  & > svg {
+    height: var(--spacing-small);
+    path {
+      fill: var(--color-text-faded);
+    }
+  }
+}
+
+.closeIcon {
+  position: absolute;
+  inset-block-start: var(--spacing-xxsmall);
+  inset-inline-end: var(--spacing-xxsmall);
+}
+
+.ctaPrimary {
+  margin-inline-end: var(--spacing-small);
+}
+
+.ctaContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small) 0px;
+}

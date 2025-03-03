@@ -1,0 +1,22 @@
+@use "src/styles/constants";
+@use "src/styles/breakpoints";
+
+.emptySpacePlaceholder {
+  height: var(--navbar-container-height);
+}
+
+.container {
+  inset-block-start: 0;
+  position: fixed;
+  height: var(--navbar-height);
+  width: 100%;
+  transition: var(--transition-regular);
+  background: var(--color-background-elevated);
+  z-index: var(--z-index-header);
+  will-change: transform;
+}
+
+.hiddenNav {
+  // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
+  transform: translate3d(0, calc(-1 * var(--navbar-container-height)), 0);
+}

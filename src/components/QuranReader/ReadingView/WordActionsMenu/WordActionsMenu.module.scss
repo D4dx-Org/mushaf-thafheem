@@ -1,0 +1,11 @@
+.readingViewOverflowVerseActionsMenu {
+  display: inline-block;
+  line-height: var(--spacing-small);
+}
+
+.container {
+  line-height: var(--spacing-micro);
+  & button {
+    width: var(--spacing-mega) !important;
+  }
+}

@@ -1,0 +1,49 @@
+@use "src/styles/utility";
+@use "src/components/QuranReader/TranslationView/TranslationText/footnote";
+@use "src/styles/theme";
+
+$translation-line-height: 1.5;
+
+.text {
+  @include footnote.footnote-styling;
+  letter-spacing: 0;
+  line-height: $translation-line-height;
+  padding-block-end: var(--spacing-micro);
+}
+
+@include utility.generate-font-scales("translation");
+
+/*
+#TODO: should move language specific fonts and direction to
+/styles/global.scss. See line#21
+*/
+.ltr {
+  /* stylelint-disable-next-line csstools/use-logical */
+  text-align: left;
+  direction: ltr;
+}
+
+.rtl {
+  direction: rtl;
+  /* stylelint-disable-next-line csstools/use-logical */
+  text-align: right;
+}
+
+.urdu {
+  font-family: "MehrNastaliq", "Mehr Nastaliq Web", "Helvetica Neue", Helvetica,
+    Arial, serif !important; // important is needed to over-ride the language specific font-family
+}
+
+.kurdish {
+  font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "MehrNastaliq" !important; // important is needed to over-ride the language specific font-family
+}
+
+.divehi {
+  font-family: "divehi" !important; // important is needed to over-ride the language specific font-family
+}
+
+.translationName {
+  margin-block-start: calc(0.5 * var(--spacing-xxsmall));
+  color: var(--color-text-faded);
+  font-size: var(--font-size-xsmall);
+}

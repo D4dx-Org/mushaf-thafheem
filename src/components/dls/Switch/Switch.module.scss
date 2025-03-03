@@ -1,0 +1,110 @@
+$selectedItemShadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+$container-padding: calc(0.5 * var(--spacing-xxsmall));
+$separatorOpacity: 0.2;
+
+.container {
+  position: relative;
+  display: grid;
+  background-color: var(--color-background-alternative-faded);
+  border-radius: var(--border-radius-pill);
+  padding-block-start: $container-padding;
+  padding-block-end: $container-padding;
+  padding-inline-start: $container-padding;
+  padding-inline-end: $container-padding;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(0, 1fr)
+  ); // use grid to prevent layout shift when `font-family: bold` on item selected https://css-tricks.com/bold-on-hover-without-the-layout-shift/
+}
+
+.xSmallContainer {
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
+.item {
+  cursor: pointer;
+  color: var(--color-text-default);
+  background-color: transparent;
+  border: none;
+  z-index: 1;
+}
+
+.item[disabled] {
+  cursor: not-allowed;
+  opacity: var(--opacity-50);
+}
+
+.separatorLine {
+  position: absolute;
+  height: 100%;
+  width: 1px;
+}
+.separatorLineVisible {
+  &::before {
+    content: "";
+    position: absolute;
+    transform: translateY(75%);
+    width: 1px;
+    height: 40%;
+    border-inline-start: 1px solid var(--color-text-default);
+    opacity: $separatorOpacity;
+  }
+}
+
+$background-container: calc(0.8 * var(--spacing-xxsmall));
+.selectedItemBackgroundContainer {
+  transition: transform var(--transition-regular) ease-in-out;
+  // the `width` and the `transform` is controlled dynamically in React component. Check Switch.tsx
+
+  position: absolute;
+  height: 100%;
+  z-index: 0;
+  padding-block-start: $background-container;
+  padding-block-end: $background-container;
+  padding-inline-start: $background-container;
+  padding-inline-end: $background-container;
+
+  box-sizing: border-box;
+
+  .selectedItemBackground {
+    border-radius: var(--border-radius-pill);
+    box-shadow: $selectedItemShadow;
+    background-color: var(--color-background-elevated);
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// sizing
+.itemNormal {
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
+  font-size: var(--font-size-normal);
+}
+
+.itemLarge {
+  padding-block-start: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
+}
+
+.itemSmall {
+  font-size: var(--font-size-xsmall);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
+}
+
+.itemXSmall {
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+}

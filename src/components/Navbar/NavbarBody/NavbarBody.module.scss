@@ -1,0 +1,53 @@
+@use "src/styles/utility";
+@use "src/styles/breakpoints";
+
+.itemsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  background-color: var(--color-background-elevated);
+}
+
+.centerVertically {
+  @include utility.center-vertically;
+}
+
+.leftCTA {
+  display: flex;
+  margin-inline-start: var(--spacing-medium);
+  align-items: center;
+
+  @include breakpoints.tablet {
+    margin-inline-start: var(--spacing-mega);
+  }
+}
+
+.rightCTA {
+  display: flex;
+  margin-inline-end: var(--spacing-medium);
+  align-items: center;
+
+  > button {
+    margin-inline-start: var(--spacing-micro);
+  }
+
+  @include breakpoints.tablet {
+    margin-inline-end: var(--spacing-mega);
+
+    > button {
+      margin-inline-start: var(--spacing-xsmall);
+    }
+  }
+}
+
+
+.iconHome {
+  fill: #ffffff; // This makes the icon use the color of its parent by default
+}
+
+// When dark mode is active, change the icon color to white
+.dark-mode .iconHome {
+  fill: currentColor; // Adjust the color as needed for dark mode
+}
+

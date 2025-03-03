@@ -1,0 +1,21 @@
+@use "src/styles/breakpoints";
+
+.container {
+  direction: ltr;
+}
+
+.title {
+  font-size: var(--font-size-jumbo);
+  text-align: center;
+  font-weight: var(--font-weight-bold);
+}
+
+.backIconContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  [dir="rtl"] & {
+    justify-content: flex-end;
+  }
+}

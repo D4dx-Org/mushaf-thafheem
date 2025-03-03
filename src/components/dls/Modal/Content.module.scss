@@ -1,0 +1,164 @@
+/* stylelint-disable csstools/use-logical */
+@use "src/styles/breakpoints";
+@use "src/components/dls/Modal/constants";
+@use "src/styles/theme";
+
+@keyframes desktopContentIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -70%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes desktopContentOut {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    transform: translate(-50%, -70%);
+  }
+}
+
+@keyframes topSheetOnMobileIn {
+  0% {
+    opacity: 0;
+    transform: translate(0%, -90%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0%, 0%);
+  }
+}
+
+@keyframes topSheetOnMobileOut {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(0%, -90%);
+  }
+}
+
+@keyframes mobileContentIn {
+  0% {
+    transform: translate(0%, 100%);
+  }
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+
+@keyframes mobileContentOut {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(0%, 100%);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.content {
+  background-color: var(--color-background-default);
+  border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+  overflow: hidden;
+  @include theme.light {
+    box-shadow: var(--shadow-jumbo);
+  }
+  @include theme.dark {
+    box-shadow: none;
+  }
+  position: fixed;
+  bottom: 0%;
+  left: 0%;
+  width: constants.$mobileWidth;
+  &:focus {
+    outline: none;
+  }
+
+  @include breakpoints.desktop {
+    border-radius: var(--border-radius-rounded);
+    width: constants.$desktopWidth;
+    bottom: inherit;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    &.medium {
+      max-width: constants.$desktopMaxWidthMedium;
+    }
+
+    &.large {
+      max-width: constants.$desktopMaxWidthLarge;
+    }
+  }
+
+  &.topSheetOnMobile {
+    @include breakpoints.smallerThanTablet {
+      // add 2.5% spacing on the left and right, on mobile
+      width: 95%;
+      margin-left: 2.5%;
+
+      top: 10%;
+      border-radius: var(--border-radius-rounded) var(--border-radius-rounded);
+      bottom: unset;
+    }
+  }
+
+  z-index: var(--z-index-modal);
+}
+
+.content[data-state="open"] {
+  animation:
+    mobileContentIn constants.$animationDuration constants.$animationEasing,
+    fadeIn constants.$animationDuration constants.$animationEasing;
+  &.topSheetOnMobile {
+    @include breakpoints.smallerThanTablet {
+      animation:
+        topSheetOnMobileIn constants.$animationDuration constants.$animationEasing,
+        fadeIn constants.$animationDuration constants.$animationEasing;
+    }
+  }
+  @include breakpoints.tablet {
+    animation:
+      desktopContentIn constants.$animationDuration constants.$animationEasing,
+      fadeIn constants.$animationDuration constants.$animationEasing;
+  }
+}
+.content[data-state="closed"] {
+  animation:
+    mobileContentOut constants.$animationDuration constants.$animationEasing,
+    fadeIn constants.$animationDuration constants.$animationEasing;
+  &.topSheetOnMobile {
+    @include breakpoints.smallerThanTablet {
+      animation:
+        topSheetOnMobileOut constants.$animationDuration constants.$animationEasing,
+        fadeOut constants.$animationDuration constants.$animationEasing;
+    }
+  }
+  @include breakpoints.tablet {
+    animation:
+      desktopContentOut constants.$animationDuration constants.$animationEasing,
+      fadeOut constants.$animationDuration constants.$animationEasing;
+  }
+}

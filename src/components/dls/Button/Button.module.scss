@@ -1,0 +1,200 @@
+@use "src/styles/utility";
+
+.base {
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: transform var(--transition-fast);
+  color: var(--themed-fg, var(--color-text-default));
+  background-color: var(--themed-bg, var(--color-background-default));
+  font-weight: var(--font-weight-medium);
+  border: 1px solid var(--themed-border);
+  height: var(--button-size);
+  justify-content: center;
+  border-radius: var(--border-radius-default);
+  padding-inline: var(--spacing-small);
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: transparent;
+      color: var(--themed-bg);
+    }
+  }
+  &:active {
+    transform: scale(0.92);
+    &.disabled {
+      transform: none;
+    }
+  }
+}
+
+// type
+.primary {
+  --themed-bg: var(--color-primary-medium);
+  --themed-fg: var(--color-text-inverse);
+  --themed-border: var(--color-primary-medium);
+}
+
+.secondary {
+  --themed-bg: var(--color-background-default);
+  --themed-fg: var(--color-text-faded);
+  --themed-border: var(--color-borders-hairline);
+
+  @media (hover: hover) {
+    &:hover {
+      --themed-bg: var(--color-text-default);
+      --themed-border: var(--color-primary-medium);
+    }
+  }
+}
+
+.success {
+  --themed-bg: var(--color-success-medium);
+  --themed-fg: var(--shade-0);
+  --themed-border: var(--color-success-medium);
+}
+
+.warning {
+  --themed-bg: var(--color-warning-medium);
+  --themed-fg: var(--shade-0);
+  --themed-border: var(--color-warning-medium);
+}
+
+.error {
+  --themed-bg: var(--color-error-medium);
+  --themed-fg: var(--shade-0);
+  --themed-border: var(--color-error-medium);
+}
+
+// size
+.large {
+  font-size: var(--font-size-large);
+  --button-size: calc(3 * var(--spacing-medium));
+}
+.normal {
+  font-size: var(--font-size-normal);
+  --button-size: calc(2.5 * var(--spacing-medium));
+}
+.small {
+  font-size: var(--font-size-normal);
+  --button-size: calc(2 * var(--spacing-medium));
+}
+
+// shape
+.square {
+  border-radius: var(--border-radius-default);
+  width: var(--button-size);
+  padding: 0;
+}
+.circle {
+  border-radius: var(--border-radius-circle);
+  width: var(--button-size);
+  padding: 0;
+}
+.pill {
+  border-radius: var(--border-radius-pill);
+}
+
+// variant
+.shadow {
+  box-shadow: var(--shadow-large);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--themed-bg);
+      color: var(--themed-fg);
+      position: relative;
+      inset-block-start: -1px;
+    }
+  }
+}
+
+.ghost {
+  background-color: transparent;
+  border: none;
+  color: var(--themed-bg);
+  &:hover {
+    background-color: var(--themed-bg);
+    @include utility.lighten-background-color;
+  }
+}
+// corner case for secondary ghost button
+.ghost.secondary {
+  --themed-bg: var(--color-text-faded);
+}
+
+.outlined {
+  background-color: transparent;
+  color: var(--themed-bg);
+  &:hover {
+    background-color: var(--themed-bg);
+    color: var(--themed-fg);
+  }
+}
+// corner case for secondary ghost button
+.ghost.secondary {
+  --themed-bg: var(--color-text-faded);
+}
+
+.compact {
+  padding-inline: 0;
+  background-color: transparent;
+  color: var(--themed-bg);
+  border: none;
+  &:hover {
+    opacity: var(--opacity-50);
+  }
+}
+
+// suffix, prefix and content contaniner
+.suffix {
+  display: flex;
+  margin-inline-start: calc(0.5 * var(--spacing-medium));
+}
+.prefix {
+  display: flex;
+  margin-inline-end: calc(0.5 * var(--spacing-medium));
+}
+.content {
+  display: flex;
+  line-height: normal;
+}
+
+// svg sizes
+.base > span > svg {
+  height: calc(0.5 * var(--button-size));
+  width: calc(0.5 * var(--button-size));
+}
+.base[dir="rtl"][data-auto-flip-icon="true"] svg {
+  transform: scaleX(-1);
+}
+
+.base.disabled {
+  cursor: not-allowed;
+  background-color: var(--color-background-alternative-medium);
+  border: 1px solid var(--color-secondary-medium);
+  color: var(--color-text-default);
+  opacity: 0.7;
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-background-alternative-medium);
+      opacity: 0.7;
+    }
+  }
+}
+.ghost.disabled {
+  border: none;
+  background: inherit;
+  @media (hover: hover) {
+    &:hover {
+      background: inherit;
+    }
+  }
+}
+
+// TODO: remove .noSidePadding usage
+.noSidePadding {
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}

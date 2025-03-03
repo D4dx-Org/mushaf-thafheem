@@ -1,0 +1,45 @@
+@use "src/styles/breakpoints";
+@use "src/styles/theme";
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block-end: var(--spacing-large);
+  padding-block-start: var(--spacing-large);
+}
+
+.sectionTitle {
+  margin-block-end: var(--spacing-medium);
+  font-weight: var(--font-weight-semibold);
+}
+
+.searchContainer {
+  margin-block-end: var(--spacing-medium);
+}
+
+.chaptersListContainer {
+  min-height: calc(25 * var(--spacing-mega));
+}
+
+.recitersListContainer {
+  min-height: calc(22 * var(--spacing-mega));
+}
+
+.reciterInfoContainer {
+  @include theme.light {
+    background-color: var(--color-success-medium);
+    color: #fff; // white text on "success" background;
+  }
+  @include theme.dark {
+    background-color: var(--color-background-elevated);
+  }
+  @include theme.sepia {
+    background-color: var(--color-background-alternative-deep);
+    color: var(--color-text-default);
+  }
+
+  padding-block: var(--spacing-medium);
+  background-color: var(--color-success-medium);
+  margin-block-end: var(--spacing-large);
+}

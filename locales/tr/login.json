@@ -1,0 +1,16 @@
+{
+    "awaiting-confirmation": "Onay bekleniyor",
+    "continue-apple": "Apple ile devam et",
+    "continue-email": "E-posta ile devam et",
+    "continue-facebook": "Facebook ile devam",
+    "continue-google": "Google ile devam",
+    "email-placeholder": "E-posta Adresi",
+    "login-error": {
+        "AuthenticationError": "Kimlik doğrulama başarısız oldu. Lütfen daha sonra tekrar deneyiniz",
+        "TokenExpiredError": "Oturumunuz kapatıldı, lütfen tekrar giriş yapın."
+    },
+    "login-title": "Quran.com'a giriş yapın",
+    "other-options": "Diğer Oturum Açma Seçenekleri",
+    "privacy-policy": "Gizliliğinizi korumak önceliğimizdir – Kaydolarak <link> Gizlilik Politikamızı <\/link> kabul etmiş olursunuz.",
+    "verify-code": "Sağlanan güvenlik kodunun aşağıdaki metinle eşleştiğini doğrulayın:"
+}

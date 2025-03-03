@@ -1,0 +1,33 @@
+.reciter {
+  margin-block-end: var(--spacing-small);
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-large);
+}
+
+.reciterLabel {
+  padding-inline-start: var(--spacing-small);
+}
+
+$recitation-padding: calc(0.5 * var(--spacing-xxsmall));
+
+.recitationStyle {
+  background-color: var(--color-success-faded);
+  margin-inline-start: var(--spacing-xsmall);
+  border-radius: var(--border-radius-pill);
+  color: var(--color-success-deep);
+  font-size: var(--font-size-normal);
+  padding-block-start: $recitation-padding;
+  padding-block-end: $recitation-padding;
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
+}
+
+.searchInputContainer {
+  margin-block-end: var(--spacing-small);
+  width: 100%;
+}
+
+.input {
+  width: 95%;
+}

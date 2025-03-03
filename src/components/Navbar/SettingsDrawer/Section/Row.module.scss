@@ -1,0 +1,11 @@
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.row > *:first-child {
+  flex: 1;
+}
+.row + .row {
+  margin-block-start: var(--spacing-xsmall);
+}
