@@ -1,15 +1,16 @@
 /* eslint-disable react/no-multi-comp */
-import React from "react";
+import React from 'react';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-import useSyncReadingProgress from "./hooks/useSyncReadingProgress";
-import ReadingPreferenceSwitcher from "./ReadingPreferenceSwitcher";
-import QuranReaderStyles from "@/redux/types/QuranReaderStyles";
-import { VersesResponse } from "types/ApiResponses";
-import { QuranReaderDataType } from "types/QuranReader";
+import useSyncReadingProgress from './hooks/useSyncReadingProgress';
+import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 
-const ReadingView = dynamic(() => import("./ReadingView"));
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType } from 'types/QuranReader';
+
+const ReadingView = dynamic(() => import('./ReadingView'));
 
 interface Props {
   isReadingPreference: boolean;
