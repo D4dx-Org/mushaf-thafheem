@@ -6,7 +6,6 @@ import { useSelector, shallowEqual } from 'react-redux';
 
 import BookmarkAction from './BookmarkAction';
 import SaveToCollectionAction from './SaveToCollectionAction';
-import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
@@ -114,6 +113,12 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
 
   return (
     <div>
+      <BookmarkAction
+        verse={verse}
+        isTranslationView={isTranslationView}
+        onActionTriggered={onActionTriggered}
+        bookmarksRangeUrl={bookmarksRangeUrl}
+      />
       <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
         {isCopied ? `${t('copied')}!` : `${t('quran-reader:copy-verse')}`}
       </PopoverMenu.Item>
@@ -121,21 +126,10 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         {t('quran-reader:cpy-link')}
       </PopoverMenu.Item>
 
-      <VerseActionAdvancedCopy
-        onActionTriggered={onActionTriggered}
-        verse={verse}
-        isTranslationView={isTranslationView}
-      />
       {!isTranslationView && (
         <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
       )}
 
-      <BookmarkAction
-        verse={verse}
-        isTranslationView={isTranslationView}
-        onActionTriggered={onActionTriggered}
-        bookmarksRangeUrl={bookmarksRangeUrl}
-      />
       {isLoggedIn() ? (
         <SaveToCollectionAction
           verse={verse}
