@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 // Corrected: Added an empty line between third-party imports and local imports
-import LanguageSelector from '../LanguageSelector';
+
 import SearchDrawer from '../SearchDrawer/SearchDrawer';
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 
@@ -54,7 +54,6 @@ const NavbarBody: React.FC = () => {
               </Button>
             </Link>
 
-            <LanguageSelector />
             <Button
               tooltip={t('settings.title')}
               shape={ButtonShape.Circle}

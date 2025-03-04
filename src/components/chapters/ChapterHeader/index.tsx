@@ -92,16 +92,11 @@ const ChapterHeader: React.FC<Props> = ({
               <Button
                 size={ButtonSize.Small}
                 variant={ButtonVariant.Ghost}
-                prefix={<InfoIcon />}
                 href={getSurahInfoNavigationUrl(chapterId)}
                 shouldPrefetch={false}
                 hasSidePadding={false}
-                onClick={() => {
-                  logButtonClick('chapter_header_info');
-                }}
-              >
-                {t('quran-reader:surah-info')}
-              </Button>
+                onClick={() => {}}
+              />
             )}
           </div>
         </div>
@@ -114,12 +109,8 @@ const ChapterHeader: React.FC<Props> = ({
               href={getSurahInfoNavigationUrl(chapterId)}
               shouldPrefetch={false}
               hasSidePadding={false}
-              onClick={() => {
-                logButtonClick('chapter_header_info');
-              }}
-            >
-              {t('quran-reader:surah-info')}
-            </Button>
+              onClick={() => {}}
+            />
           )}
           <div className={styles.actionContainer}>
             <PlayChapterAudioButton chapterId={Number(chapterId)} />
