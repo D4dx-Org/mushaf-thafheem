@@ -8,7 +8,6 @@ import BookmarkAction from './BookmarkAction';
 import SaveToCollectionAction from './SaveToCollectionAction';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
-import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import CopyLinkIcon from '@/icons/copy-link.svg';
@@ -125,10 +124,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       <PopoverMenu.Item onClick={onShareVerseClicked} icon={<CopyLinkIcon />}>
         {t('quran-reader:cpy-link')}
       </PopoverMenu.Item>
-
-      {!isTranslationView && (
-        <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
-      )}
 
       {isLoggedIn() ? (
         <SaveToCollectionAction
