@@ -1,17 +1,19 @@
 /* eslint-disable react/no-multi-comp */
-import React from 'react';
+import React from "react";
 
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-import useSyncReadingProgress from './hooks/useSyncReadingProgress';
+import useSyncReadingProgress from "./hooks/useSyncReadingProgress";
+import ReadingPreferenceSwitcher from "./ReadingPreferenceSwitcher";
 
-import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { VersesResponse } from 'types/ApiResponses';
-import { QuranReaderDataType } from 'types/QuranReader';
+import QuranReaderStyles from "@/redux/types/QuranReaderStyles";
+import { VersesResponse } from "types/ApiResponses";
+import { QuranReaderDataType } from "types/QuranReader";
 
-const ReadingView = dynamic(() => import('./ReadingView'));
+const ReadingView = dynamic(() => import("./ReadingView"));
 
 interface Props {
+  isReadingPreference: boolean;
   quranReaderStyles: QuranReaderStyles;
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
@@ -19,25 +21,33 @@ interface Props {
 }
 
 const QuranReaderView: React.FC<Props> = ({
+  isReadingPreference,
   quranReaderStyles,
   quranReaderDataType,
   initialData,
   resourceId,
 }) => {
-  // We'll always use reading mode
-  const isReadingPreference = true;
-
   useSyncReadingProgress({
     isReadingPreference,
   });
 
+  if (isReadingPreference) {
+    return (
+      <>
+        <ReadingView
+          quranReaderStyles={quranReaderStyles}
+          quranReaderDataType={quranReaderDataType}
+          initialData={initialData}
+          resourceId={resourceId}
+        />
+      </>
+    );
+  }
+
   return (
-    <ReadingView
-      quranReaderStyles={quranReaderStyles}
-      quranReaderDataType={quranReaderDataType}
-      initialData={initialData}
-      resourceId={resourceId}
-    />
+    <>
+      <ReadingPreferenceSwitcher />
+    </>
   );
 };
 
